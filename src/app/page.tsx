@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import QRCodeScanner from './components/QRCodeScanner';
 import ARModel from './components/ARModel';
 
