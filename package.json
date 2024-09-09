@@ -1,0 +1,35 @@
+{
+  "name": "ar-test",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.112.0",
+    "@react-three/fiber": "^8.17.6",
+    "html5-qrcode": "^2.3.8",
+    "jsqr": "^1.4.0",
+    "next": "14.2.8",
+    "qrcode": "^1.5.4",
+    "qrcode-reader": "^1.0.4",
+    "qrcode.react": "^4.0.1",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-qr-reader": "^3.0.0-beta-1",
+    "react-qr-scanner": "^1.0.0-alpha.11",
+    "three": "^0.168.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/three": "^0.168.0",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.8",
+    "typescript": "^5"
+  }
+}
