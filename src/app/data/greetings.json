@@ -1,0 +1,14 @@
+
+[
+    {
+      "id": "1",
+      "modelUrl": "/models/model1.glb",
+      "message": "С днём рождения!"
+    },
+    {
+      "id": "2",
+      "modelUrl": "/models/model2.glb",
+      "message": "Поздравляем с годовщиной!"
+    }
+  ]
+  

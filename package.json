@@ -9,8 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-navigation/native": "^6.1.18",
+    "@react-navigation/native-stack": "^6.11.0",
     "@react-three/drei": "^9.112.0",
-    "@react-three/fiber": "^8.17.6",
+    "@react-three/fiber": "^8.17.7",
+    "@zxing/library": "^0.21.3",
     "html5-qrcode": "^2.3.8",
     "jsqr": "^1.4.0",
     "next": "14.2.8",

@@ -1,48 +1,39 @@
-"use client";
+"use client"
 
-import { useState } from 'react';
-import QrScanner from './components/QrScanner';
-import ThreeDViewer from './components/ThreeDViewer';
+import { useState, useEffect } from 'react';
+import QRCodeScanner from './components/QRCodeScanner';
+import ARModel from './components/ARModel';
 
-// Тип для данных QR-кода
-type QRData = {
-  [key: string]: {
-    modelUrl: string;
-    message: string;
+interface Greeting {
+  id: string;
+  modelUrl: string;
+  message: string;
+}
+
+const Home: React.FC = () => {
+  const [greeting, setGreeting] = useState<Greeting | null>(null);
+
+  const fetchGreeting = async (id: string) => {
+    const response = await fetch('/data/greetings.json');
+    const greetings: Greeting[] = await response.json();
+    const foundGreeting = greetings.find(g => g.id === id);
+    setGreeting(foundGreeting || null);
   };
-};
 
-const qrData: QRData = {
-  "https://example.com/qr1": {
-    modelUrl: "/models/model1.glb",
-    message: "С днём рождения! Желаю счастья и здоровья!"
-  },
-  "https://example.com/qr2": {
-    modelUrl: "/models/model2.glb",
-    message: "С новым годом! Пусть сбудется всё, о чём мечтаешь!"
-  }
-};
-
-const Home = () => {
-  const [selectedModel, setSelectedModel] = useState<string | null>(null);
-  const [message, setMessage] = useState<string | null>(null);
-
-  const handleScan = (data: string | null) => {
-    if (data && data in qrData) {
-      const { modelUrl, message } = qrData[data];
-      setSelectedModel(modelUrl);
-      setMessage(message);
-    } else {
-      console.log("Unknown QR code data");
-    }
+  const handleScan = (result: string) => {
+    const [, id] = result.split('/');
+    fetchGreeting(id);
   };
 
   return (
     <div>
-      <h1>Виртуальные открытки</h1>
-      <QrScanner onScan={handleScan} />
-      {selectedModel && <ThreeDViewer modelUrl={selectedModel} />}
-      {message && <p>{message}</p>}
+      <QRCodeScanner onScan={handleScan} />
+      {greeting && (
+        <>
+          <ARModel modelUrl={greeting.modelUrl} />
+          <p>{greeting.message}</p>
+        </>
+      )}
     </div>
   );
 };
