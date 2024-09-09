@@ -1,0 +1,11 @@
+{
+    "https://example.com/qr1": {
+      "modelUrl": "/models/model1.glb",
+      "message": "С днём рождения! Желаю счастья и здоровья!"
+    },
+    "https://example.com/qr2": {
+      "modelUrl": "/models/model2.glb",
+      "message": "С новым годом! Пусть сбудется всё, о чём мечтаешь!"
+    }
+  }
+  

@@ -1,31 +1,30 @@
-import { useState } from 'react';
-import { QrReader } from 'react-qr-reader';
+import React from 'react';
+import QRScanner from 'react-qr-scanner';
 
-const QRScanner = ({ onScan }) => {
-  const [scanResult, setScanResult] = useState(null);
+interface QrScannerProps {
+  onScan: (data: string | null) => void;
+}
 
+const QrScanner: React.FC<QrScannerProps> = ({ onScan }) => {
   const handleScan = (data: string | null) => {
     if (data) {
-      setScanResult(data);
-      onScan(data); // Передаем данные из QR-кода в родительский компонент
+      onScan(data);
     }
   };
 
-  const handleError = (err: any) => {
-    console.error(err);
+  const handleError = (error: any) => {
+    console.error(error);
   };
 
   return (
     <div>
-      <QrReader
-        delay={300}
-        onError={handleError}
+      <QRScanner
         onScan={handleScan}
+        onError={handleError}
         style={{ width: '100%' }}
       />
-      {scanResult && <p>Результат сканирования: {scanResult}</p>}
     </div>
   );
 };
 
-export default QRScanner;
+export default QrScanner;
