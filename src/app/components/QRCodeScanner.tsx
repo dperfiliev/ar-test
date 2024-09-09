@@ -1,5 +1,5 @@
 // components/QRCodeScanner.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { BrowserMultiFormatReader, Result } from '@zxing/library';
 
 interface QRCodeScannerProps {
@@ -7,27 +7,27 @@ interface QRCodeScannerProps {
 }
 
 const QRCodeScanner: React.FC<QRCodeScannerProps> = ({ onScan }) => {
-  const [scanning, setScanning] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  const startScanning = () => {
+  useEffect(() => {
     const codeReader = new BrowserMultiFormatReader();
-    codeReader.decodeFromInputVideoDevice(undefined, 'video')
-      .then((result: Result) => {
-        onScan(result.getText()); // Используйте getText() для получения текста результата
-        setScanning(false);
-      })
-      .catch(err => console.error(err));
 
-    setScanning(true);
-  };
+    if (videoRef.current) {
+      codeReader.decodeFromInputVideoDevice(undefined, videoRef.current)
+        .then((result: Result) => {
+          onScan(result.getText()); // Передаем текст результата в родительский компонент
+        })
+        .catch(err => console.error(err));
+    }
+
+    return () => {
+      codeReader.reset(); // Очистка при размонтировании
+    };
+  }, [onScan]);
 
   return (
     <div>
-      {!scanning ? (
-        <button onClick={startScanning}>Start Scanning</button>
-      ) : (
-        <video id="video" width="300" height="200" />
-      )}
+      <video ref={videoRef} width="100%" height="100%" autoPlay />
     </div>
   );
 };

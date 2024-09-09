@@ -1,3 +1,4 @@
+// pages/index.tsx
 "use client"
 
 import { useState } from 'react';
@@ -26,7 +27,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div>
+    <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
       <QRCodeScanner onScan={handleScan} />
       {greeting && (
         <>

@@ -12,7 +12,10 @@ const ARModel: React.FC<ARModelProps> = ({ modelUrl }) => {
   const gltf = useLoader(GLTFLoader, modelUrl);
 
   return (
-    <Canvas>
+    <Canvas
+      style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+      camera={{ position: [0, 0, 5], fov: 75 }}
+    >
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <primitive object={gltf.scene} />
